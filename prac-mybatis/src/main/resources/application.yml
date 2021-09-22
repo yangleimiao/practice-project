@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@172.30.234.57:1521:UAT
+    username: apps
+    password: apps
+    driver-class-name: oracle.jdbc.OracleDriver
+server:
+  port: 8081
