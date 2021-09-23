@@ -1,6 +1,7 @@
 package com.example.mybatis.model;
 
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -15,5 +16,9 @@ public class DataModel {
     private String stuName;
 
     private int stuClaId;
+
+    public String toString(){
+        return "["+stuId+","+stuName+","+stuClaId+"]";
+    }
 
 }

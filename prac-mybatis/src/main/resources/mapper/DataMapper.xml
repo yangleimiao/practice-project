@@ -3,8 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mybatis.mapper.DataMapper" >
-    <select id="list" resultType="com.example.mybatis.model.DataModel">
-
+    <!-- List<DataModel> -->
+    <resultMap id="resultMapClass" type="com.example.mybatis.model.DataModel" autoMapping="true">
+        <result column="stuId" property="stuId"/>
+        <result column="stuName" property="stuName"/>
+        <result column="stuClaId" property="stuClaId"/>
+    </resultMap>
+    <select id="list" resultMap="resultMapClass">
     select stu.stu_id as stuId
     ,stu.stu_name as stuName
     ,stu.stu_cla_id as stuClaId
@@ -19,4 +24,36 @@
         from students stu
         where stu.stu_id =#{stuId}
     </select>
+    <insert id="insert" parameterType="com.example.mybatis.model.DataModel">
+        insert into students(stu_id,stu_name,stu_cla_id) values(#{stuId},#{stuName},#{stuClaId})
+    </insert>
+    <delete id="delete" parameterType="integer">
+        delete from students stu
+        where stu.stu_id =#{stuId}
+    </delete>
+
+    <!-- ClassModel List<DataModel> -->
+    <resultMap id="ClassResultMap" type="com.example.mybatis.model.ClassModel" autoMapping="true">
+        <id property="claId" column="claId" javaType="Integer"/>
+        <collection property="students" ofType="com.example.mybatis.model.DataModel" autoMapping="true">
+            <id property="stuId" column="stuId" javaType="Integer"/>
+            <result column="stuId" property="stuId" />
+            <result column="stuName" property="stuName"/>
+            <result column="stuClaId" property="stuClaId"/>
+        </collection>
+    </resultMap>
+    <select id="fetchStudentsOfClass" parameterType="int" resultMap="ClassResultMap">
+        select stu.stu_id as stuId
+             ,stu.stu_name as stuName
+             ,stu.stu_cla_id as claId
+        from students stu
+        where stu.stu_cla_id =#{claId}
+    </select>
+
+    <update id="updateByStuId" parameterType="com.example.mybatis.model.DataModel">
+        update students stu
+        set stu.stu_name = #{stuName}
+        ,stu.stu_cla_id = #{stuClaId}
+        where stu.stu_id = #{stuId}
+    </update>
 </mapper>

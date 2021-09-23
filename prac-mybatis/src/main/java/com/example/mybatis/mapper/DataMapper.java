@@ -1,7 +1,10 @@
 package com.example.mybatis.mapper;
 
+import com.example.mybatis.model.ClassModel;
 import com.example.mybatis.model.DataModel;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 
 /**
@@ -10,6 +13,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DataMapper {
-    DataModel list(int claId);
+    List<DataModel> list(int claId)  throws Exception;
     DataModel selectStuById(int stuId);
+
+    int insert(DataModel model);
+    int delete(int stuId);
+    ClassModel fetchStudentsOfClass(int claId);
+
+    int updateByStuId(DataModel model);
 }
