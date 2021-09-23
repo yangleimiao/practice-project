@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.DynamicSQLMapper" >
+    
+    <select id="getStuByIf" parameterType="int" resultType="com.example.mybatis.model.DataModel">
+        select stu.stu_id as stuId
+             ,stu.stu_name as stuName
+             ,stu.stu_cla_id as stuClaId
+        from students stu
+        <where>
+            <if test="stuId != null">
+                stu.stu_id =#{stuId}
+            </if>
+        </where>
+
+    </select>
+    
+    
+</mapper>

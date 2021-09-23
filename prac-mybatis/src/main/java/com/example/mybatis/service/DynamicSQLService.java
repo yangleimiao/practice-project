@@ -1,13 +1,11 @@
-package com.example.mybatis.mapper;
+package com.example.mybatis.service;
 
 import com.example.mybatis.model.DataModel;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author yanglei
  * @date 2021/9/23
  */
-@Mapper
-public interface DynamicSQLMapper {
+public interface DynamicSQLService {
     DataModel getStuByIf(int stuId);
 }
