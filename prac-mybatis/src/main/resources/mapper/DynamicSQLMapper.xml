@@ -16,6 +16,37 @@
         </where>
 
     </select>
+
+    <select id="getStuByIf2" parameterType="int" resultType="com.example.mybatis.model.DataModel">
+        select stu.stu_id as stuId
+        ,stu.stu_name as stuName
+        ,stu.stu_cla_id as stuClaId
+        from students stu
+        <where>
+            <if test="stuName !=null">
+                stu.stu_name = #{stuName}
+            </if>
+            <if test="stuId != null and stuId !=0">
+                and stu.stu_id =#{stuId}
+            </if>
+
+        </where>
+    </select>
+    
+    
+    <select id="getStuByChoose" parameterType="com.example.mybatis.model.DataModel" resultType="com.example.mybatis.model.DataModel">
+        select stu.stu_id as stuId
+             ,stu.stu_name as stuName
+             ,stu.stu_cla_id as stuClaId
+        from students stu
+        <where>
+            <choose>
+                <when test="stuId != null and stuId !=0">stu.stu_id=#{stuId}</when>
+                <when test="stuName !=null and stuName !=''">stu.stu_name = #{stuName}</when>
+                <otherwise>stu.stu_cla_id=2</otherwise>
+            </choose>
+        </where>
+    </select>
     
     
 </mapper>

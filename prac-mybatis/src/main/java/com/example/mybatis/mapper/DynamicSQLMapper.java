@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DynamicSQLMapper {
     DataModel getStuByIf(int stuId);
+    DataModel getStuByIf2(DataModel model);
+    DataModel getStuByChoose(DataModel model);
 }
