@@ -19,6 +19,7 @@ import javax.websocket.server.PathParam;
 public class DynamicSQLController {
     @Resource
     DynamicSQLService service;
+    
 
     @GetMapping(value = "/getStuByIf")
     @ResponseBody
