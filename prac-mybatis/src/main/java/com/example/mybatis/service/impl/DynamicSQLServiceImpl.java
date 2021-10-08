@@ -17,7 +17,24 @@ public class DynamicSQLServiceImpl implements DynamicSQLService {
     DynamicSQLMapper mapper;
     @Override
     public DataModel getStuByIf(int stuId) {
-        return mapper.getStuByIf(stuId);
+        DataModel model = mapper.getStuByIf(stuId);
+        System.out.println(model.toString());
+        return model;
+        //return null;
+    }
+
+    @Override
+    public DataModel getStuByIf2(DataModel model) {
+        System.out.println("--------");
+        DataModel stu = mapper.getStuByIf2(model);
+        System.out.println("-----: "+stu.getStuName());
+        return stu;
+        //return null;
+    }
+
+    @Override
+    public DataModel getStuByChoose(DataModel model) {
+        return mapper.getStuByChoose(model);
         //return null;
     }
 }

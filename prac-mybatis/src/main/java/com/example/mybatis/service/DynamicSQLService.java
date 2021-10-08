@@ -8,4 +8,6 @@ import com.example.mybatis.model.DataModel;
  */
 public interface DynamicSQLService {
     DataModel getStuByIf(int stuId);
+    DataModel getStuByIf2(DataModel model);
+    DataModel getStuByChoose(DataModel model);
 }

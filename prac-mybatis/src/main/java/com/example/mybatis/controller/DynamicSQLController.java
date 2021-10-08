@@ -25,4 +25,26 @@ public class DynamicSQLController {
     public DataModel getStuByIf(@PathParam(value = "stuId") int stuId){
         return service.getStuByIf(stuId);
     }
+
+    @GetMapping(value = "/getStuByIf2")
+    @ResponseBody
+    public DataModel getStuByIf2(@PathParam(value = "stuName") String stuName){
+        DataModel model = new DataModel();
+        // model.setStuId(stuId);
+        model.setStuName(stuName);
+        //System.out.println(model.toString());
+        return service.getStuByIf2(model);
+    }
+
+    @GetMapping(value = "/getStuByChoose")
+    @ResponseBody
+    public DataModel getStuByChoose(
+            @PathParam(value = "stuName") String stuName
+            //@PathParam(value = "stuId") int stuId
+    ){
+        DataModel model = new DataModel();
+        //model.setStuId(stuId);
+        model.setStuName(stuName);
+        return service.getStuByChoose(model);
+    }
 }
