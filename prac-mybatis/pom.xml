@@ -51,11 +51,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.9.1</version>
-        </dependency>
+            <version>3.5.0</version>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ucp -->
         <!--<dependency>
