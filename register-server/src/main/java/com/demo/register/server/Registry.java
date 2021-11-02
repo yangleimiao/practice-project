@@ -1,5 +1,7 @@
 package com.demo.register.server;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  * @date 2021/11/1
  * 注册表
  */
+@Slf4j
 public class Registry {
     private static Registry instance = new Registry();
     private Registry(){}
@@ -22,12 +25,13 @@ public class Registry {
      * @param serviceInstance 实例名称
      */
     public void register(ServiceInstance serviceInstance){
-        Map<String,ServiceInstance> serviceInstanceMap = registry.get(serviceInstance.getServiceInstanceName());
+        Map<String,ServiceInstance> serviceInstanceMap = registry.get(serviceInstance.getServiceName());
         if (serviceInstanceMap == null){
             serviceInstanceMap = new HashMap<>();
-            registry.put(serviceInstance.getServiceInstanceName(),serviceInstanceMap);
+            registry.put(serviceInstance.getServiceName(),serviceInstanceMap);
         }
         serviceInstanceMap.put(serviceInstance.getServiceInstanceId(),serviceInstance);
+        log.info("服务实例 {} 完成注册",serviceInstance);
     }
 
     /**
@@ -54,6 +58,7 @@ public class Registry {
      * @param serviceInstanceId
      */
     public void remove(String serviceInstanceName,String serviceInstanceId){
+        log.info("删除服务实例 {}",serviceInstanceId);
         registry.get(serviceInstanceName).remove(serviceInstanceId);
     }
 

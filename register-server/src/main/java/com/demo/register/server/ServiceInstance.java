@@ -3,8 +3,6 @@ package com.demo.register.server;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.rmi.dgc.Lease;
-
 /**
  * @author yanglei
  * @date 2021/11/1
@@ -19,8 +17,6 @@ public class ServiceInstance {
     private String hostname;
 
     private int port;
-
-    private String serviceInstanceName;
 
     private String serviceInstanceId;
 
@@ -105,14 +101,6 @@ public class ServiceInstance {
 
     public void setPort(int port) {
         this.port = port;
-    }
-
-    public String getServiceInstanceName() {
-        return serviceInstanceName;
-    }
-
-    public void setServiceInstanceName(String serviceInstanceName) {
-        this.serviceInstanceName = serviceInstanceName;
     }
 
     public String getServiceInstanceId() {
