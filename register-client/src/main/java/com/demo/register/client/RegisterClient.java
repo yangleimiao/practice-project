@@ -58,13 +58,14 @@ public class RegisterClient {
             RegisterClientWorker registerClientWorker = new RegisterClientWorker();
             registerClientWorker.start();
             registerClientWorker.join();
+            // 启动发送心跳的程序
             heartbeatWorker.start();
+            // 初始化客户端缓存的服务注册表组件
             this.registry.initialize();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
     /**
      * 停止RegisterClient组件
      */
@@ -72,6 +73,8 @@ public class RegisterClient {
         this.isRunning = false;
         this.heartbeatWorker.interrupt();
         this.registry.destroy();
+        // 服务下线
+        this.httpSender.cancel(SERVICE_NAME,serviceInstanceId);
     }
 
     @Slf4j
