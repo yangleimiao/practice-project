@@ -42,6 +42,11 @@ public class ServiceInstance {
     public Boolean isAlive(){
         return this.lease.isAlive();
     }
+
+    /**
+     * 契约类
+     * 维护一个服务实例和注册中心之间的联系
+     */
     private class Lease{
         /**
          * 最新一次心跳的时间
@@ -49,7 +54,7 @@ public class ServiceInstance {
         private Long latestHeartBeatTime = System.currentTimeMillis();
 
         /**
-         * 续约
+         * 续约，发送一次心跳相当于续约
          */
         public void renew(){
             this.latestHeartBeatTime = System.currentTimeMillis();

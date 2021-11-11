@@ -11,12 +11,12 @@ import java.util.Map;
  * 注册表
  */
 @Slf4j
-public class Registry {
-    private static Registry instance = new Registry();
-    private Registry(){}
+public class ServiceRegistry {
+    private static ServiceRegistry instance = new ServiceRegistry();
+    private ServiceRegistry(){}
 
     private Map<String,Map<String,ServiceInstance>> registry = new HashMap<>();
-    public static Registry getInstance(){
+    public static ServiceRegistry getInstance(){
         return instance;
     }
 
@@ -24,7 +24,7 @@ public class Registry {
      * 服务注册
      * @param serviceInstance 实例名称
      */
-    public void register(ServiceInstance serviceInstance){
+    public synchronized void register(ServiceInstance serviceInstance){
         Map<String,ServiceInstance> serviceInstanceMap = registry.get(serviceInstance.getServiceName());
         if (serviceInstanceMap == null){
             serviceInstanceMap = new HashMap<>();
@@ -40,7 +40,7 @@ public class Registry {
      * @param serviceInstanceId 实例Id
      * @return 服务实例
      */
-    public ServiceInstance getServiceInstance(String serviceInstanceName,String serviceInstanceId){
+    public synchronized ServiceInstance getServiceInstance(String serviceInstanceName,String serviceInstanceId){
         return registry.get(serviceInstanceName).get(serviceInstanceId);
     }
 
@@ -48,7 +48,7 @@ public class Registry {
      * 获取注册表
      * @return
      */
-    public Map<String,Map<String,ServiceInstance>> getRegistry(){
+    public synchronized Map<String,Map<String,ServiceInstance>> getRegistry(){
         return registry;
     }
 
@@ -57,7 +57,7 @@ public class Registry {
      * @param serviceInstanceName
      * @param serviceInstanceId
      */
-    public void remove(String serviceInstanceName,String serviceInstanceId){
+    public synchronized void remove(String serviceInstanceName,String serviceInstanceId){
         log.info("删除服务实例 {}",serviceInstanceId);
         registry.get(serviceInstanceName).remove(serviceInstanceId);
     }
